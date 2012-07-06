@@ -1,0 +1,152 @@
+/*
+* Author:      Marco Kuiper (http://www.marcofolio.net/)
+*/
+
+// Speed of the automatic slideshow
+var slideshowSpeed = 6000;
+
+// Variable to store the images we need to set as background
+// which also includes some text and url's.
+var photos = [  {
+		"title" : "Compliant MEMS Radial Actuator - designed by Kurtis Ford",
+		"image" : "kurtis_device_700x300.jpg",
+		"url" : "equipment",
+		"firstline" : "The Utah Nanofab provides the equipment, processes and expertise necessary to design, build and package revolutionary micro and nanoscale devices. Facilities include device modeling, design layout, mask fabrication, thin film deposition, patterning and device packaging.",
+		"secondline" : "Fabrication"
+	}, {
+		"title" : "Polysilicon Micromountains - designed by Kathryn Ecsedy",
+		"image" : "banner_mountains_700x300.jpg",
+		"url" : "#",
+		"firstline" : "Nanofab coursework includes microfluidics, solar cell design, micromachining, semiconductor device physics, and surface analysis. Our research and process engineers teach, train and help develop the minds and technical skills of researchers and students, alike.",
+		"secondline" : "Education"
+	} , {
+		"title" : "&quot;Micro Gyroscope&quot; - From the research of Prof. Carlos Mastrangelo <br/>and Prof. Hanseup Kim",
+		"image" : "gyroscope.jpg",
+		"url" : "equipment/list_by_category/Microscopy+Core",
+		"firstline" : "The Micron Microscopy Suite provides state-of-the-art tools to fully characterize and understand nanoscale surface, film and device properties.",
+		"secondline" : "Characterization"
+	}
+];
+
+
+
+$(document).ready(function() {
+		
+	// Backwards navigation
+	$("#back").click(function() {
+		stopAnimation();
+		navigate("back");
+	});
+	
+	// Forward navigation
+	$("#next").click(function() {
+		stopAnimation();
+		navigate("next");
+	});
+	
+	var interval;
+	$("#control").toggle(function(){
+		stopAnimation();
+	}, function() {
+		// Change the background image to "pause"
+		$(this).css({ "background-image" : "url(assets/js/slider/images/btn_pause.png)" });
+		
+		// Show the next image
+		navigate("next");
+		
+		// Start playing the animation
+		interval = setInterval(function() {
+			navigate("next");
+		}, slideshowSpeed);
+	});
+	
+	
+	var activeContainer = 1;	
+	var currentImg = 0;
+	var animating = false;
+	var navigate = function(direction) {
+		// Check if no animation is running. If it is, prevent the action
+		if(animating) {
+			return;
+		}
+		
+		// Check which current image we need to show
+		if(direction == "next") {
+			currentImg++;
+			if(currentImg == photos.length + 1) {
+				currentImg = 1;
+			}
+		} else {
+			currentImg--;
+			if(currentImg == 0) {
+				currentImg = photos.length;
+			}
+		}
+		
+		// Check which container we need to use
+		var currentContainer = activeContainer;
+		if(activeContainer == 1) {
+			activeContainer = 2;
+		} else {
+			activeContainer = 1;
+		}
+		
+		showImage(photos[currentImg - 1], currentContainer, activeContainer);
+		
+	};
+	
+	var currentZindex = 100;
+	var showImage = function(photoObject, currentContainer, activeContainer) {
+		animating = true;
+		
+		// Make sure the new container is always on the background
+		if (currentZindex==0) currentZindex=100;
+		currentZindex--;
+		
+		// Set the background image of the new active container
+		$("#sliderimg" + activeContainer).css({
+			"background" : "#000 url(assets/js/slider/images/" + photoObject.image + ") right top no-repeat",
+			"display" : "block",
+			"z-index" : currentZindex
+		});
+		
+		// Hide the slider text
+		$("#slidertxt").css({"display" : "none"});
+		
+		// Set the new slider text
+		$("#firstline").html(photoObject.firstline);
+		$("#secondline")
+			.attr("href", photoObject.url)
+			.html(photoObject.secondline);
+		$("#pictureduri")
+			.attr("href", photoObject.url)
+			.html(photoObject.title);
+		
+		
+		// Fade out the current container
+		// and display the slider text when animation is complete
+		$("#sliderimg" + currentContainer).fadeOut(function() {
+			setTimeout(function() {
+				$("#slidertxt").css({"display" : "block"});
+				animating = false;
+			}, 500);
+		});
+	};
+	
+	var stopAnimation = function() {
+		// Change the background image to "play"
+		$("#control").css({ "background-image" : "url(assets/js/slider/images/btn_play.png)" });
+		
+		// Clear the interval
+		clearInterval(interval);
+	};
+	
+	// We should statically set the first image
+	navigate("next");
+	
+	// Start playing the animation
+	interval = setInterval(function() {
+		navigate("next");
+	}, slideshowSpeed);
+	
+});

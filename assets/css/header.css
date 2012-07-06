@@ -1,0 +1,279 @@
+@import url("navigation_flyover.css");
+#debug_window {
+    display: none;
+    width: 200px;
+    height: 100px;
+    position: absolute;
+    background-color: #DDEDAB;
+    overflow: auto;
+}
+.container {
+}
+header {
+        display: block;
+	background: #fff url(../images/header/uofu_medallion_gray.jpg) ;
+	background-position: 150px 0px;
+	background-repeat: no-repeat;
+}
+header.row {
+	/*margin-bottom: 0;*/
+}
+	div#decorative_header {
+		height: 20px;
+		background: #ccc url(../images/layout/bg_header_shadow.png) center top no-repeat;
+	}
+    #login_holder {
+    }
+        #login_link {
+            display: block;
+            text-decoration: none;
+            background-color: #33a4f8;
+            width: 50px;
+            border-top-left-radius: 3px;
+            border-top-right-radius: 3px;
+            padding-left: 5px;
+            padding-right:  5px;
+            text-align: center;
+            color: white;
+        }	
+	div#links_container {
+		margin-bottom: 0;
+		height: 100px;
+		padding-top: 10px;
+	}
+    a#u_of_u_home {
+        display: block;
+        height: 100px;
+	width: 90px;
+	float: left;
+        text-indent: -5000em;
+	/* background: url(../images/header/logo1.png) left top no-repeat; */
+	background: url(../images/header/block_u.png) left top no-repeat; 
+	/*background-size: 100px 100px;*/
+    }
+    a#home_link {
+        display: block;
+        height: 85px;
+	width: 370px;
+        text-indent: -5000em;
+	float: left;
+	/* background: url(../images/header/logo1.png) left top no-repeat; */
+	background: url(../images/header/logo2.png) 0 0 no-repeat; 
+	position: relative;
+    }
+    a#coe_link {
+        display: block;
+        margin-left: 160px;
+	position: relative;
+	top: -25px;
+    }
+    div#campus_elements {
+        float: right;
+	margin-bottom: 0;
+	margin-right: 0;
+    }
+	ul#campus_links {
+		background-color: #9e9e9e;
+		height: 1.5em;
+		margin: 0;
+		padding: 0;
+		right: -0.2em;
+		top: 0;
+		list-style: none;
+		color: #fff;
+	}
+		ul#campus_links a {
+			color: #fff;
+		}
+		ul#campus_links li {
+			display: block;
+			margin-left: 0.5em;
+			margin-right: 10px;
+			margin-bottom: 0;
+			height: 100%;
+			float: left;
+		}
+		ul#campus_links li#rounded_corner {
+			background: url("../images/header/grayCorner.png") no-repeat scroll left bottom ;
+			width: 5px;
+			margin-left: -5px;
+		}
+	form#search_form {
+		display: block;
+		float: right;
+		margin: 50px 5px 0 5px;
+                background-image: url(../images/header/search_left.png);
+                background-position: 0 0;
+                background-repeat: no-repeat;
+                padding: 0 0 0 15px;
+                width: 347px;
+	}
+		form#search_form #search_inner {
+			margin-top: 0;
+			background: #c00 url(../images/header/search_mid.png) left top repeat-x;
+			height: 25px;
+		}
+		form#search_form #search_inner * {
+			margin-bottom: 0;
+		}
+            form#search_form input[type="text"] {
+                border: none;
+                padding: 0;
+            }
+            form#search_form input, form#search_form label, form#search_form select {
+                float: left;
+                margin-top: 2px;
+            }
+            form#search_form #search_button {
+                height: 25px;
+                width: 77px;
+		margin-top: 0;
+                background: #fff url(../images/header/search_button.png) left top no-repeat;
+            }
+            form#search_form #search_label {width: 50px;}
+            form#search_form #searchSelect {width: 100px;}
+            form#search_form input#s {width: 120px; margin-top: 5px;}
+            #search_form {}
+
+	nav, nav.row {
+		clear: both;
+	} 
+
+            nav ul.row {
+                    padding-bottom: 0;
+                    margin-bottom: 0;
+                    
+            }
+		nav ul  {
+                        background: url(../images/header/menu-btn-piece.png) left top repeat-x;
+                        height: 100%;
+                        font-size: 100%;
+		}
+
+                nav li {
+                        line-height: 20px;
+                        background: url(../images/header/menu-btn-piece.png) left top repeat-x;
+                        margin-bottom: 0;
+                        padding-left: 0;
+                        padding-right: 0;
+                }
+                nav a {
+                    display: block;
+                    padding: 3px;
+                }
+
+		nav ul ul  {
+			background-image: none;
+                        display: none;
+		}
+
+            nav ul.row {
+                    padding-bottom: 0;
+                    margin-bottom: 0;
+                    
+            }
+		nav ul  {
+                        background: url(../images/header/menu-btn-piece.png) left top repeat-x;
+                        height: 100%;
+		}
+
+                nav li {
+                        line-height: 20px;
+                        background: url(../images/header/menu-btn-piece.png) left top repeat-x;
+                        margin-bottom: 0;
+                        padding-left: 0;
+                        padding-right: 0;
+                }
+                nav a {
+                    display: block;
+                    padding-top: 3px;
+                    padding-bottom: 3px;
+                   
+                }
+
+		nav ul ul  {
+			background-image: none;
+                        display: none;
+		}
+                
+
+
+/* #Mobile (Portrait) */
+    @media only screen and (max-width: 767px) {
+		a#home_link {
+			background: url(../images/header/logo_mobile.png) left top no-repeat;
+
+		}
+		#campus_links {
+			display: none;
+		}
+		header a#coe_link {
+			margin-left: 35px;
+			margin-top: 5px;
+		}
+		header {
+			background-image: none;
+		}
+		#searchSelect {
+			display: none;
+		}
+		header form#search_form {
+			width: 247px;
+		}
+                /* #Cancel Flyover Effect on Navigation Menu */
+                /* Don't display news or banner' */
+                /*
+                #navmenu li:hover ul, #slider, #news_tabs, #frontpage_news {
+                        display:none;
+                }
+                */
+                #slider, #news_tabs, #frontpage_news {
+                        display:none;
+                }
+		    a#u_of_u_home {
+			display: none;
+			}
+
+	}
+/* #Mobile (Landscape) */
+    @media only screen and (min-width: 480px) and (max-width: 767px) {
+		a#home_link {
+			background: url(../images/header/logo2.png) left top no-repeat;
+		}
+		#campus_links {
+			display: none;
+		}
+		header {
+			background-image: none;
+		}
+                /* #Cancel Flyover Effect on Navigation Menu */
+                /* Don't display news or banner' */
+                #slider, #news_tabs, #frontpage_news {
+                        display:none;
+                }
+		    a#u_of_u_home {
+			display: none;
+			}
+                
+	}
+/* #Tablet */
+    @media only screen and (min-width: 768px) and (max-width: 959px) {
+		a#home_link {
+			background: url(../images/header/logo_2_scaled_down.png) left top no-repeat;
+			width: 292px;
+		}
+			a#coe_link {
+				margin-left: 70px;
+			}
+		    a#u_of_u_home {
+			display: block;
+			height: 80px;
+			width: 72px;
+			float: left;
+			text-indent: -5000em;
+			/* background: url(../images/header/logo1.png) left top no-repeat; */
+			background: url(../images/header/block_u_scaled_down.png) left top no-repeat; 
+			/*background-size: 100px 100px;*/
+		    }
+	}
+

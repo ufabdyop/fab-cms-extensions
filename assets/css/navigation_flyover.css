@@ -1,0 +1,90 @@
+/* 
+    Document   : navigation_flyover
+    Created on : Mar 16, 2012, 3:39:03 PM
+    Author     : ryant
+    Description:
+        Handles the on hover - flyout style navigation menu
+*/
+                #navmenu {
+                    position: relative;
+			z-index: 1001;
+                }
+                #navmenu li ul a:hover {
+                        top: 0; 
+                        left: 0;
+                        background: #aaa;
+                        color: #fff;
+                }
+                #navmenu li ul{
+                        border: 1px solid #CCC;
+                        margin:0;
+                        top: 100%;
+                        background:none repeat scroll 0 0 #EEE;
+                        box-shadow: 0 1px 5px #CCCCCC;
+                        border-bottom-left-radius: 5px;
+                        border-bottom-right-radius: 5px;
+                        height:auto;
+                        border-top:0;
+                        display: none;
+                        width:150px;
+                        position: absolute;
+                        z-index: 1002;
+
+                }
+                #navmenu li a {
+                    cursor: default;
+                }
+                #navmenu li li {
+                        position:relative;
+                        margin:0;
+                        line-height:15px;
+                        background-position:center;
+                        background-image: none;
+                }
+                #navmenu li li a {
+                        width: 97%;
+                        padding-left: 3%;
+			padding-right: 1px;
+                        cursor: pointer;
+                }
+                #navmenu li:hover ul, #navmenu ul.current {
+                        display:block;
+                        opacity:1;
+                }
+
+                /* #Mobile (Portrait) */
+                @media only screen and (max-width: 767px) {
+                     #navmenu li ul.current, #navmenu li:hover ul.current {
+                        position: static;
+                        display: block;
+                        width: 100%;
+                        border: none;
+                        box-shadow: none;
+                        border-bottom-left-radius: 0;
+                        border-bottom-right-radius: 0;
+                     }
+                     #navmenu li:hover ul {
+                         display: none;
+                     }
+                }
+                
+                /* #Mobile (Landscape) */
+                @media only screen and (min-width: 480px) and (max-width: 767px) {
+                     #navmenu li ul.current, #navmenu li:hover ul.current {
+                        position: static;
+                        display: block;
+                        width: 100%;
+                        border: none;
+                        box-shadow: none;
+                        border-bottom-left-radius: 0;
+                        border-bottom-right-radius: 0;
+                     }
+                     #navmenu li:hover ul {
+                         display: none;
+                     }
+                     /*Cancel flyover effect on small screens
+                     #navmenu li:hover ul {
+                         display: none;
+                     }
+                     */
+                }

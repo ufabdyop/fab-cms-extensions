@@ -1,0 +1,212 @@
+div#shadow, body, #footer, div#decorative_footer, div#footer_container {
+	background-color: #cccccc;
+}
+
+a, a:visited {
+	text-decoration: underline;
+	/* color: #666; */
+	color: #8F5917; /*From university color palette: http://umc.utah.edu/branding/visual-style*/
+}
+nav a, #footer a, #news_tabs a, header a, 
+nav a:visited, #footer a:visited, #news_tabs a:visited, header a:visited {
+	text-decoration: none;
+	color: #333;
+}
+a:hover,
+a:active,
+a:focus { 
+	color: #c00;
+	/*text-decoration: none;*/
+	text-decoration: underline;
+}
+nav a:hover, #footer a:hover, #news_tabs a:hover, header a:hover,
+nav a:active, #footer a:active, #news_tabs a:active, header a:active,
+nav a:focus, #footer a:focus, #news_tabs a:focus, header a:focus {
+	text-decoration: none;
+	color: #333;
+}
+header nav a:hover {
+/*	background-color: #ccc;*/
+}
+
+#content {
+    clear: both;
+    display: block;
+    margin-top: 30px;
+}
+
+#affiliations h3, nav#servicesmenu h3 {
+    /* font-family: Helvetica, Arial, sans-serif; */
+    font-size: 18px;
+    color: #fff;
+    background: #c00 url(../images/layout/bg_banner.png) left top repeat-x;
+}
+
+#affiliations, nav#servicesmenu {
+    text-align: center;
+    margin-bottom: 5px;
+    background-color: #fbfbfb;
+}
+nav#servicesmenu ul ul {
+	margin-left: 0;
+	margin-top: 0;
+}
+ul ul li a {
+    line-height: 20px;
+}
+nav#servicesmenu ul li.current ul {
+    display: block;
+}
+nav#servicesmenu ul ul li {
+	background-image: none;
+	background-color: #eee;
+	margin-bottom: 0;
+}
+nav#servicesmenu ul ul li:hover {
+	background-color: #fff;
+}
+nav#servicesmenu ul ul li a {
+}
+
+.container {
+   /* background-color: #fff; */
+}
+
+#shadow {
+    background: url(../images/layout/bg_shadow.png) center top repeat-y;
+}
+#decorative_footer {
+    background: url(../images/layout/bg_footer_shadow.png) center top no-repeat;
+    height: 50px;
+}
+
+#homepage_content {
+    margin-top: 10px;
+}
+
+body {
+    /*background: url(../images/layout/gov-background-secondary.jpg) center top no-repeat;*/
+}
+
+#copyright_and_contact {
+    text-align: left;
+}
+
+#footer_links {
+    text-align: right;
+}
+
+#slider {
+	width: 100%;
+}
+#frontpage_news {
+    height: 300px;
+    overflow: auto;
+}
+
+
+table tr td {
+        vertical-align: middle;
+}
+
+html table.pretty_table {
+	border-collapse: collapse;
+	border-spacing: 2px;
+	margin-bottom: 20px;
+}
+.pretty_table tr td {
+	background-color: #F0F0F0;
+	padding: 2px;
+}
+
+.pretty_table tr:nth-child(odd) td {
+	background-color: #DAD8D3;
+}
+.pretty_table tr:hover td {
+	background-color: #E3E2DE;	
+	background-color: #AEBDC5;
+	background-color: #d5e6ef;
+}
+
+    /*revert previous rules if table is marked as plain*/
+    table.plain_table tr:hover td, table.plain_table tr td, table.plain_table tr:nth-child(odd) td {
+        background-color: #fff;
+        vertical-align: middle;
+    }
+
+th {
+	text-align: left;
+	font-weight: bold;
+	padding: 2px 10px 2px 0;
+}
+
+.message {
+	border: 1px solid #DAC092;
+	background-color: #F7F3D2;
+	padding: 5px;
+}
+
+ul.equipment_listing, ul.equipment_listing ul, ul.job_listings{
+  list-style: disc;
+  list-style-position: inside;
+}
+ul.equipment_listing, ul.equipment_listing ul p {
+    
+}
+ul.job_listings {
+    margin-left: 20px;
+}
+img.story {
+    float: right;
+    display: block;
+    margin: 0 15px 15px 15px;
+    
+}
+img.story2 {
+    float: left;
+    margin: 0 15px 0 0;
+}
+
+
+
+#breadcrumb {
+    margin-top: -10px;
+    border-bottom: 1px solid #666;
+    height: 1.5em;
+    
+}
+    #breadcrumb li {
+        float: left;
+        margin-right: 5px;
+    }
+    #breadcrumb li a {
+        text-decoration: none;
+    }
+    
+.address span {
+	display: block;
+}
+#footer .address span {
+	display: inline;
+}
+#footer .address span + span::before {
+	content: ", ";
+}
+
+a.video {
+	display: block;
+}
+
+ul#errors {
+	background-color: pink;
+	padding: 5px;
+	border: 1px solid #666;
+}
+ul#messages {
+	background-color: beige;
+	padding: 5px;
+	border: 1px solid #666;
+}
+table#submit_abstract tr td {
+	vertical-align: top;
+}
