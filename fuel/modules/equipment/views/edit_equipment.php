@@ -26,12 +26,23 @@ ob_start();
 if (isset($maps)) {
 	?>
 	<label>Map</label>
-	<select name="map_id" onchange="document.getElementById('box').style.background-image = 'none'">
+	<select id="map_selector" name="map_id" onchange="document.getElementById('box').style.background-image = 'none'">
 		<?foreach($maps as $m) {
 			$checked = ( $eq->map_id == $m['id'] ? " selected" : "" );
 			echo "\t<option value=\"{$m['id']}\" $checked>{$m['description']}</option>\n";
 		}?>
 	</select><br/>
+	<script language="javascript">
+		$('#map_selector').change( function() {
+			$.ajax('<?=site_url('equipment/map/path')?>/' + $('#map_selector').val(),
+			{ 'complete': function(data) {
+					var newmap = data.responseText;
+					$('div#box').css('background-image', 'url(' + newmap + ')' );
+				}
+			} );
+
+		} );
+	</script>
 	<?
 }
 ?>
