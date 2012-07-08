@@ -1,0 +1,98 @@
+table.equipment_listing_table a:visited{
+     color: #8F5917;
+}
+
+
+a.doc_link, a.pdf_link, a.edit_link, a.tool_file {
+ display: block;
+  background: url(images/doc_icon.png) left top no-repeat;
+  float: left;
+  padding-left: 25px;
+  margin-left: 10px;
+  height: 25px;
+  font-size: 13px;
+ }
+a.pdf_link {
+ background-image: url(images/pdf_icon.jpg) ;
+}
+a.edit_link {
+ background-image: url(images/edit_icon.jpg) ;
+}
+tr.portrait td {
+padding: 10px;
+}
+a.misc {
+ background-image: url(images/misc.png);
+}
+a.pdf {
+ background-image: url(images/pdf_icon.jpg);
+}
+a.jpg, a.png {
+ background-image: url(images/image.png);
+}
+a.zip {
+ background-image: url(images/archive.png);
+}
+a.exe {
+ background-image: url(images/app.png);
+}
+a.txt {
+ background-image: url(images/text.png);
+}
+img.equipment_thumbnail { margin-left: 20px; }
+
+/*
+.equipment h2 {
+text-align: center;
+border-bottom: 2px solid #777;
+margin-bottom: 15px;
+}
+
+*/
+.equipment #marker {
+ width: 30px; 
+ height: 30px; 
+ position: absolute; 
+ background: url(images/marker.png) left top no-repeat; 
+}
+
+.admin_toolbar_item {
+ display: block;
+ background: #ccc;
+}
+
+ul#errors {
+margin-top: 0px;
+border: 1px solid red;
+color: red;
+}
+ul#errors li {
+list-style: none;
+}
+
+h4.equipment_file {
+ padding-bottom: 7px;
+ color: #000;
+ font-size: 13px;
+ font-weight: bold;
+ clear: both;
+ 
+}
+a.new_row {
+clear: both;
+}
+
+.equipment a {
+font-size: 13px;
+}
+.equipment h3 {
+clear: both;
+}
+table.equipment_status td+td, table.equipment_status th+th {
+ border-left: 1px solid black;
+ padding-left: 5px;
+}
+
+/*For reservations*/
+#iframe iframe{ margin:0; padding:0; height:600px; }
+
