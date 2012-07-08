@@ -405,9 +405,9 @@ class equipment extends Fuel_base_controller {
 			$this->load->view($this->config->item('main_view'), $config);
 		} else {
 			//load maps
-                        //$this->load->model('maps_model');
-                        //$maps = $this->maps->get_all();
-                        $maps = array();
+                        $this->load->model('maps_model', 'maps');
+                        $maps = $this->maps->get_all();
+                        //$maps = array();
                         
 			$equipment = urldecode($equipment);
 			$this->load->model('equipment_model', 'equipment');
