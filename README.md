@@ -54,10 +54,17 @@ Download changes to fuel cms for equipment tracking:
     git clone git://github.com/ufabdyop/fab-cms-extensions.git
 
 rsync those to main fuel directory
+
+    rsync -nrv --size-only fab-cms-extensions/ /var/www/html/FUEL-CMS/
+    
 edit fuel/application/config/database.php
+
 edit fuel/modules/equipment/config/equipment_config.php to configure svn for files
-edit fuel/modules/equipment/models/equipment_model.php:   public static $coral_eq_url = 'http://coral.nanofab.utah.edu/coral/xml/equipment/Area.xml';
+
+edit fuel/modules/equipment/models/equipment_model.php:   public static $coral_eq_url = 'http://mycoralserver.mydomain.com/coral/xml/equipment/Area.xml';
+
 edit fuel/application/helpers/login_helper.php
 
 create svn tree: public, staff, member
+
 create coralutah schema in postgres db
