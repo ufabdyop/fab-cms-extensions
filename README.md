@@ -55,7 +55,9 @@ Download changes to fuel cms for equipment tracking:
 
 rsync those to main fuel directory
 
-    rsync -nrv --size-only fab-cms-extensions/ /var/www/html/FUEL-CMS/
+    rsync -nrv --size-only fab-cms-extensions/ /var/www/html/FUEL-CMS/ #check the output
+    rsync -rv --size-only fab-cms-extensions/ /var/www/html/FUEL-CMS/ #remove the dry-run flag -n
+    
     
 edit fuel/application/config/database.php
 
