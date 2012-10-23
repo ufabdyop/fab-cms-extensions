@@ -1,0 +1,32 @@
+{Tue, 23 Oct 2012 14:59:35 GMT} Zenphoto v1.4.2.3[9710]
+  Backtrace: fatal zp_error:MySQL Error: Zenphoto received the error <em></em> when connecting to the database server.
+  zp_error called
+   from db_connect (functions-db-MySQL.php [37])
+     from require_once (functions-basic.php [72])
+       from require_once (functions.php [18])
+         from require_once (template-functions.php [10])
+           from login_zenphoto_admin (login_helper.php [260])
+             from login (login_helper.php [137])
+               from Users_model->valid_coral_user (users_model.php [16])
+                 from Users_model->valid_user (users_model.php [46])
+                   from Fuel_auth->login (Fuel_auth.php [53])
+                     from Login->index (login.php [81])
+                       from call_user_func_array (unknown)
+                         from require_once (CodeIgniter.php [318])
+                           from index.php [236]
+{Tue, 23 Oct 2012 15:00:38 GMT}
+  Backtrace: fatal zp_error:MySQL Error: Zenphoto received the error <em></em> when connecting to the database server.
+  zp_error called
+   from db_connect (functions-db-MySQL.php [37])
+     from require_once (functions-basic.php [72])
+       from require_once (functions.php [18])
+         from require_once (template-functions.php [10])
+           from login_zenphoto_admin (login_helper.php [260])
+             from login (login_helper.php [137])
+               from Users_model->valid_coral_user (users_model.php [16])
+                 from Users_model->valid_user (users_model.php [46])
+                   from Fuel_auth->login (Fuel_auth.php [53])
+                     from Login->index (login.php [81])
+                       from call_user_func_array (unknown)
+                         from require_once (CodeIgniter.php [318])
+                           from index.php [236]

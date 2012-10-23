@@ -3,9 +3,12 @@ fab-cms-extensions
 
 Some extensions to the fuel cms for fab equipment tracking
 
-
 Install FUEL cms from github.  One note here: I ran into trouble on my centos box because I didn't have the php-mysql extensions installed.
 FUEL doesn't give a helpful error in that case.  So make sure to do a yum install php-mysql php-pgsql if on CentOS/Redhat.  
+
+Some additional prerequisites and their install commands on centos:
+
+yum install php-gd php-ldap
 
 git clone git://github.com/daylightstudio/FUEL-CMS.git
 
@@ -71,3 +74,7 @@ edit fuel/application/helpers/login_helper.php
 create svn tree: public, staff, member
 
 create coralutah schema in postgres db
+
+Make sure short tags are on in /etc/php.ini
+
+Make sure "AllowOverride FileInfo Options Limit" is in /etc/httpd/conf/httpd.conf
