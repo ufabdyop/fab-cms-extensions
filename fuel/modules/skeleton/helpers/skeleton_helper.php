@@ -52,40 +52,39 @@ function number_to_english($num) {
  * @param type $options 
  */
 function skeleton_nav($options) {
-        $total_columns = 16;
-        
-        $nav = fuel_nav($options); 
-        $nav = preg_replace_callback('#href="([^"]*)"#si', 'skel_clean_urls', $nav);
-        $nav = str_replace('&', '&amp;', $nav);
-
-	if ($nav == "") {
-		return;
+	try {
+		$total_columns = 16;
+		
+		$nav = fuel_nav($options); 
+		$nav = preg_replace_callback('#href="([^"]*)"#si', 'skel_clean_urls', $nav);
+		$nav = str_replace('&', '&amp;', $nav);
+		$nav_xml = new SimpleXMLElement($nav);
+		$columns_per_nav_item = floor( $total_columns / $nav_xml->count() );
+		$remainder = $total_columns % $nav_xml->count();
+		$class = number_to_english($columns_per_nav_item) . ' ' . ($columns_per_nav_item > 1 ? ("columns") : "column");
+		
+		//slurp up the rest of the columns for the last nav item
+		$columns = $columns_per_nav_item + $remainder;
+		$last_class = number_to_english($columns) . ' ' . ($columns > 1 ? ("columns") : "column");
+		
+		//$columns_per_nav_item = 
+		foreach($nav_xml as $li) {
+		    
+		    $attr = $li->attributes();
+		    if (isset($li->attributes()->class)) {
+			if ($li->attributes()->class == "last") {
+			    $attr['class'] .= " $last_class omega";
+			} else {
+			    $attr['class'] .= " $class";
+			}
+		    } else {
+			$li->addAttribute('class', $class);
+		    }
+		}
+		echo str_replace('<?xml version="1.0"?>', '', $nav_xml->asXML());
+		//echo "nav is $nav\n";
+	} catch (Exception $e) {
+		echo "";
 	}
-
-        $nav_xml = new SimpleXMLElement($nav);
-        $columns_per_nav_item = floor( $total_columns / $nav_xml->count() );
-        $remainder = $total_columns % $nav_xml->count();
-        $class = number_to_english($columns_per_nav_item) . ' ' . ($columns_per_nav_item > 1 ? ("columns") : "column");
-        
-        //slurp up the rest of the columns for the last nav item
-        $columns = $columns_per_nav_item + $remainder;
-        $last_class = number_to_english($columns) . ' ' . ($columns > 1 ? ("columns") : "column");
-        
-        //$columns_per_nav_item = 
-        foreach($nav_xml as $li) {
-            
-            $attr = $li->attributes();
-            if (isset($li->attributes()->class)) {
-                if ($li->attributes()->class == "last") {
-                    $attr['class'] .= " $last_class omega";
-                } else {
-                    $attr['class'] .= " $class";
-                }
-            } else {
-                $li->addAttribute('class', $class);
-            }
-        }
-        echo str_replace('<?xml version="1.0"?>', '', $nav_xml->asXML());
-        //echo "nav is $nav\n";
 }
 ?>

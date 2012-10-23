@@ -18,12 +18,16 @@
 
         $this->db->where( 'lab', $abbr);
         $this->db->where( 'active', '1');
+	$this->db->order_by('ordering');
         $rows = $this->db->get('lab_rates')->result_array();
         foreach($rows as $row)
         {
                 $row_class = ($row_class == "odd" ? "even" : "odd");
                 $internal = "\$" . $row['internal_amount'] . "/" . $row['per_units'];
                 $external = "\$" . $row['external_amount'] . "/" . $row['per_units'];
+                if ($row['internal_amount'] == -1) {
+                        $internal = "N/A";
+                }
                 if ($row['external_amount'] == -1) {
                         $external = "N/A";
                 }

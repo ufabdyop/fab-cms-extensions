@@ -129,9 +129,21 @@ class equipment extends Fuel_base_controller {
 		$this->load->view($this->config->item('main_view'), array('title' => 'Equipment Status Report', 'content' => $content));	
 	}
 
-	function move_status() {
+	function move_status($version = null) {
 		//see the function move_status_deprecated for displaying a simple table of move start / finish dates
-		header('Location: /ci_plugins/tmp/uploads/openmsp/html/gantt.html');
+		if ($version) {
+			if ($version == 'accelerated') {
+				header( 'Location: /ci_plugins/tmp/uploads/openmsp/2012-10-15/accelerated.html' );
+			}
+			if ($version == 'extended') {
+				header( 'Location: /ci_plugins/tmp/uploads/openmsp/2012-10-15/extended.html' );
+			}
+		}
+
+		 $content = '<p>These have been updated to show our two plans that are under consideration.  The <a href="' . site_url('equipment/move_status/accelerated') . '">first plan</a> lays out a schedule in which all funding resources are available immediately.  The <a href="' . site_url('equipment/move_status/accelerated') . '">second plan</a> is an extended plan in which equipment is moved as funding resources become available over time.</p>';
+		$this->load->view($this->config->item('main_view'), array('title' => 'Equipment Move Schedule', 'content' => $content));	
+
+
 	}
 	function move_status_deprecated() {
 		$this->load->model('equipment_model', 'equipment');
@@ -184,7 +196,6 @@ class equipment extends Fuel_base_controller {
 		if ($category == null) {
 			$this->load->model('equipment_model', 'equipment');
 			$categories = $this->equipment->get_categories();
-			//var_dump($categories);
 			$i = 0;
 			foreach ($categories as $cat) {
 				if($cat[0] == 'Microscopy Core') {

@@ -891,7 +891,7 @@ class MY_Model extends CI_Model {
 	{
 		$this->db->where($where);
                 $table_name = $this->table_name;
-                if ($join_where) {
+                if ($join_where && is_array($join_where)) {
                     foreach($join_where as $table_field => $match) {
                         list($table, $field) = explode('.', $table_field);
                         $table_name .= ", " . $table;

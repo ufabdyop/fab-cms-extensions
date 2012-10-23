@@ -90,7 +90,10 @@ class equipment_model extends Base_module_model {
 								$obj->config->item('svn_config_dir'),
 								$this->svn_user,
 								$this->svn_pass,
-								$obj->config->item('svn_storage_dir'));
+								$obj->config->item('svn_storage_dir'),
+								$obj->config->item('svn_storage_dir_anonymous'),
+								$obj->config->item('svn_config_dir_anonymous')
+								);
 	}
 
 	//uses credentials to authenticate to svn and get role-appropriate file listings
@@ -106,7 +109,10 @@ class equipment_model extends Base_module_model {
 								$this->config->item('svn_config_dir'),
 								$username,
 								$password,
-								$this->config->item('svn_storage_dir'));
+								$this->config->item('svn_storage_dir'),
+								$this->config->item('svn_storage_dir_anonymous'),
+								$this->config->item('svn_config_dir_anonymous')
+								);
 	}
 
 	//return array of file folders of the following format
@@ -171,6 +177,7 @@ class equipment_model extends Base_module_model {
 					}
 				}
 			} catch (Exception $e) {
+				//debugging
 				//svn_file->get_directories for the staff and member directories will throw exceptions without proper credentials
 			}
 		}
@@ -341,9 +348,6 @@ class equipment_model extends Base_module_model {
 			$xpath .= $ancestor_xpath_suffix;
 		}
 
-		//remove root directory (in our case nanofab-utah-edu)
-		$directory = substr( $directory, strpos($directory, '/') + 1);
-
 		if ($access != null ) {
 			$directory = $access . '/' . $directory;
 		}
@@ -407,7 +411,8 @@ class equipment_model extends Base_module_model {
 		$x = self::$hierarchy;
 		$cats = array();
 		$map = $this->get_owner_map();
-		foreach($x->area->area as $a) {
+		$base = $x->lab;
+		foreach($base->area as $a) {
 			$name = (string)$a['name'];
 			if (isset($map[$name])) {
 				$cats[] = array($a['name'], $map[$name]);
@@ -447,7 +452,7 @@ class equipment_model extends Base_module_model {
 		$x = self::$hierarchy;
 		$cats = array();
 
-		$nodes = $x->xpath("/xml/area/area[@name='$category']");
+		$nodes = $x->xpath("/xml/lab/area[@name='$category']");
 
 		foreach($nodes as $a) {
 			if (isset($a->machine)) {
@@ -575,12 +580,18 @@ class equipment_model extends Base_module_model {
 		$i=0;
 		$calendar = new vcalendar( array( 'unique_id' => 'nanofab.utah.edu'));
 		//$calendar->setProperty( "X-WR-TIMEZONE", "America/Denver" );
-		while($i<$n-1){
+		while($i<$n){
 			$k=$i;
 			$start=strtotime($cal[$i]['bdate']);
 			$end=strtotime($cal[$i]['edate']);
-			$starti=strtotime($cal[++$i]['bdate']);
-			$endi=strtotime($cal[$i]['edate']);
+
+			$i++;
+			$starti = false;
+			$endi = false;
+			 if ( isset($cal[$i])) {
+				$starti = $cal[$i]['bdate'];
+				$endi = strtotime($cal[$i]['edate']);
+			 }
 			while ($starti<=$end && $endi>=$end){
 				$end=$endi;
 				if ($i<$n-1){
@@ -602,7 +613,7 @@ class equipment_model extends Base_module_model {
 				$e->setProperty( 'dtend'
 							   , date("Ymd\THis",$end1));
 				$e->setProperty( 'summary'
-							   , 'Project: '.$cal[$k]['project'].' \nAgent:'.$cal[$k]['agent'] );				
+							   , 'Project: '.$cal[$k]['project'].' \nAgent: '.$cal[$k]['agent'] );				
 				$date_start=date("Ymd",strtotime($date_start)+strtotime("+1 day")-time());
 				$time_start="00:00";
 				$start=strtotime($date_start."000000");
@@ -614,7 +625,7 @@ class equipment_model extends Base_module_model {
 			$e->setProperty( 'dtend'
 						   , date("Ymd\THis",$end));
 			$e->setProperty( 'summary'
-						   , 'Project: '.$cal[$k]['project'].' \nAgent:'.$cal[$k]['agent'] );						   
+						   , 'Project: '.$cal[$k]['project'].' \nAgent: '.$cal[$k]['agent'] );						   
 		}
 		if ($n>0) {
 			$string=$calendar->createCalendar();
@@ -822,5 +833,6 @@ class equipment_model extends Base_module_model {
 		
 		return FALSE;
 	}
+
 }
 ?>

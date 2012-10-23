@@ -36,6 +36,7 @@
 					<p>We instill a discipline of safety throughout our facility and in all aspects of our work. We are committed to providing a safe work environment through training, communication, and quality resources.</p>
 				</li>
 				<li id="news">
+					<a href="/blog/categories/news/feed" id="news_feed" class="rss_link">Subscribe</a>
                                     <?
                                         foreach($news as $story) {
                                             echo "<div class=\"news_story\">\n";
@@ -47,6 +48,7 @@
                                     ?>
                                 </li>
 				<li id="events">
+					<a href="/blog/categories/events/feed" id="events_feed" class="rss_link">Subscribe</a>
                                     <?
                                         foreach($events as $story) {
                                             echo "<div class=\"news_story\">\n";

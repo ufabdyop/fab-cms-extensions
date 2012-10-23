@@ -1,6 +1,6 @@
 <?ob_start();?>
-<p class="message">View our tentative equipment <a href="<?=site_url('equipment/move_status')?>">move dates</a>.</p>
 <h3>Fabrication</h3>
+<p class="message">View our plans for the <a href="<?=site_url('equipment/move_status')?>">equipment move schedule</a>.</p> 
 <table width="100%" border="1" align="center" class="equipment_listing_table pretty_table">
 	<tr><th>Category</th><th>Owner</th></tr>
 	<?foreach($categories as $cat) {?>
@@ -32,6 +32,8 @@
 		<?}?>
 	<?}?>
 </table>
+<h3>Affiliated Labs</h3>
+<p>Didn&#039;t find the tools or instruments you were looking for?  You might find what you need with some of our <a href="/index/about-us/affiliatedlabs">affiliated labs</a> on campus.</p>
 <div id="monalisa_panda_contact">
 </div>
 <?

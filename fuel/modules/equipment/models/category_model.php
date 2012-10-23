@@ -11,7 +11,6 @@ class category_model extends CI_Model {
 	function load_by_name($name) {
 		$this->name = $name;
 		$obj =& get_instance();
-		//var_dump(pg_connect("host=coral.nanofab.utah.edu user=eq_ex password=coral dbname=coral"));
 		$db = $obj->load->database('coral_eq', true);
 		$db->where('category', $name);
 		$results = $db->get('coralutah.category_html')->row();

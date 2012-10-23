@@ -3,7 +3,9 @@ class svn_file extends CI_Model {
 
 	var $repo; //URI of svn repo
 	var $tmpconfigdir; //the local directory to use for authentication
+	var $tmpconfigdir_anonymous; //the local directory to use for authentication
 	var $tmpstoragedir; //the local directory to use for checkout
+	var $tmpstoragedir_anonymous; //the local directory to use for checkout as anonymous
 	var $username; //the local directory to use for checkout
 	var $password; //the local directory to use for checkout
 	var $executable = 'svn'; //the svn command
@@ -20,10 +22,18 @@ class svn_file extends CI_Model {
 	 * True on success, false on failure
 	 * 
 	 **/
-	public function connect($repo_url, $tmpconfigdir, $user, $pass, $tmpstoragedir) {
+	public function connect($repo_url, $tmpconfigdir, $user, $pass, $tmpstoragedir, $tmpstorage_anonymous = null, $tmpconfigdir_anonymous = null) {
 		$this->repo = $repo_url;
 		$this->tmpconfigdir = $tmpconfigdir;
 		$this->tmpstoragedir = $tmpstoragedir;
+		$this->tmpstoragedir_anonymous = $tmpstorage_anonymous;
+		if ($tmpstorage_anonymous == null) {
+			$this->tmpstoragedir_anonymous = $tmpstoragedir;
+		}
+		$this->tmpconfigdir_anonymous = $tmpconfigdir_anonymous;
+		if ($tmpconfigdir_anonymous == null) {
+			$this->tmpconfigdir_anonymous = $tmpconfigdir;
+		}
 		if (file_exists($tmpstoragedir)) {
 			//`rm -r $tmpstoragedir/*`;
 		}
@@ -54,14 +64,21 @@ class svn_file extends CI_Model {
 			$repo_url_string = '';
 		}
 
-		$cmd = $this->executable . ' --non-interactive --config-dir ' . $this->tmpconfigdir ;
+		$config_segment = ' --config-dir ' . $this->tmpconfigdir;
+
+		$cmd = $this->executable . ' --non-interactive';
 		if ($this->username && $this->password) {
 			$cmd .= ' --username ' . "'$this->username' --password '$this->password' " ;
+		} else {
+			$config_segment = ' --config-dir ' . $this->tmpconfigdir_anonymous;
+			//$config_segment = '';
 		}
-		$cmd .= " $command $repo_url_string $extra_arguments 2>&1";
+
+		$cmd .= " $config_segment $command $repo_url_string $extra_arguments 2>&1";
 		return $cmd;
 	}
 
+	/*
 	private function debug($output) {
 		$fh = fopen( '/tmp/svncommands.txt', 'a' );
 		fwrite( $fh, $output . "\n" );
@@ -79,19 +96,19 @@ class svn_file extends CI_Model {
 		//fwrite( $fh, print_r(debug_backtrace(), true) . "\n" );
 		fclose($fh);
 	}
+	*/
 
 	/**
 	 * Executes an svn command, captures the stdout and exit code.  Throws an exception if 
 	 * exit code is not 0
 	 **/
 	private function execute(&$cmd, &$output, &$exit_code) {
-		$this->debug( "Command: " .  print_r($cmd, true) . "\n" );
+		//$this->debug( "Command: " .  print_r($cmd, true) . "\n" );
 		exec($cmd, $output, $exit_code);
 		if (is_array($output)) {
 			$output = implode("\n", $output);
 		}
-		//$this->debug( "Username: " .  print_r($this->username, true) . " Password: " . $this->password . "\n" );
-		$this->debug(  "Output: " .  print_r($output, true) . "\n" );
+		//$this->debug(  "Output: " .  print_r($output, true) . "\n" );
 
 		if ($exit_code != 0 ) {
 			throw new Exception("Command could not execute (return code $exit_code): " . $output);
@@ -261,23 +278,26 @@ class svn_file extends CI_Model {
 	 **/
 	public function get_file($path) {
 			$directory = pathinfo($path, PATHINFO_DIRNAME) ;
-			$this->debug("Path: $path\n");
+			//$this->debug("Path: $path\n");
 
+			$storagedir = $this->tmpstoragedir;
 			//reconnect to svn
 			if ($this->username) {
 				$this->connect($this->repo, $this->tmpconfigdir, $this->username, $this->password, $this->tmpstoragedir);
+			} else {
+				$storagedir = $this->tmpstoragedir_anonymous;
 			}
 
 			//check out from svn
-			$command = $this->get_command("co --depth=empty ", $directory, $this->tmpstoragedir . '/' . $directory );
+			$command = $this->get_command("co --depth=empty ", $directory, $storagedir . '/' . $directory );
 			$this->execute($command, $output, $exit_code);
 
 			//update file
-			$command = $this->get_command("up '$this->tmpstoragedir/$path'", $path );
+			$command = $this->get_command("up '$storagedir/$path'", $path );
 			$this->execute($command, $output, $exit_code);
 
 			//return the path to the file
-			return $this->tmpstoragedir . '/' . $path;
+			return $storagedir . '/' . $path;
 	}
 
 	public function isDirEmpty($dir){
