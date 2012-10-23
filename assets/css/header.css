@@ -40,6 +40,7 @@ header.row {
 		margin-bottom: 0;
 		height: 100px;
 		padding-top: 10px;
+		position: relative;
 	}
     a#u_of_u_home {
         display: block;
@@ -64,8 +65,9 @@ header.row {
     a#coe_link {
         display: block;
         margin-left: 160px;
-	position: relative;
-	top: -25px;
+	position: absolute;
+	top: 70px;
+	height: 40px;
     }
     div#campus_elements {
         float: right;
